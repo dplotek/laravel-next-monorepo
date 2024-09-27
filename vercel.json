@@ -1,23 +1,15 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/index.php",
-      "use": "vercel-php@0.6.0"
-    },
-    {
-      "src": "client/package.json",
-      "use": "@vercel/next"
+  "framework": null,
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.6.0"
     }
-  ],
+  },
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.php"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/client/$1"
+      "dest": "/api/index.php"
     }
   ],
   "env": {
@@ -34,5 +26,6 @@
     "CACHE_DRIVER": "array",
     "LOG_CHANNEL": "stderr",
     "SESSION_DRIVER": "cookie"
-  }
+  },
+  "ignoreCommand": "cd client && npm install && npm run build"
 }
